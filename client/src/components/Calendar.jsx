@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 
-const Calendar = ({ takeMonth, takeYear }) => {
+const Calendar = ({ takeMonth, takeYear, letMeSetModal, giveDate }) => {
   let [firstDay, setFirstDay] = useState();
   let [totalDays, setTotalDays] = useState();
   let [emptyblocks, setEmptyBlocks] = useState();
   let [days, setDays] = useState();
+
+  let handleClick = (i, month, year) => {
+    giveDate(i);
+    letMeSetModal(true);
+  };
+
   let weekDays = [
     "Sunday",
     "Monday",
@@ -41,11 +47,23 @@ const Calendar = ({ takeMonth, takeYear }) => {
       <div className="blocks_container">
         {arr.map((i, index) => {
           return i > emptyblocks ? (
-            <div className="check_box" key={index}>
+            <div
+              onClick={() => {
+                handleClick(i - emptyblocks, takeMonth, takeYear);
+              }}
+              className="check_box"
+              key={index}
+            >
               {i - emptyblocks}
             </div>
           ) : (
-            <div key={index} className="not_check_box"></div>
+            <div
+              onClick={() => {
+                handleClick();
+              }}
+              key={index}
+              className="not_check_box"
+            ></div>
           );
         })}
       </div>

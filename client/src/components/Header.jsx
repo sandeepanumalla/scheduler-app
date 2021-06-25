@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./style.css";
-const Header = ({ setFilter, giveYear, giveMonth }) => {
+const Header = ({ setFilter, giveYear, giveMonth, letSetModal }) => {
   const [localfilters, setLocalFilters] = useState("monthly");
   let date = new Date();
   let months = [
@@ -72,6 +72,15 @@ const Header = ({ setFilter, giveYear, giveMonth }) => {
           }}
         >
           {">"}
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            letSetModal(true);
+          }}
+        >
+          View Schedules
         </button>
       </div>
       <div className="filters">

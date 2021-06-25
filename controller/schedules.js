@@ -1,15 +1,4 @@
-let db = require("../connection/connection");
-
-exports.getTeachers = async (req, res) => {
-  let getTeacher = "SELECT * from bh8skktn4hxrdqcocv5b.teachers;";
-  db.query(getTeacher, (err, result) => {
-    if (err) {
-      return res.status(400).json("error in fetching teachers from db");
-    } else {
-      return res.status(200).json(result);
-    }
-  });
-};
+const db = require("../connection/connection");
 
 exports.addSchedule = async (req, res) => {
   let { teacherId, fromDate, Till, task, Title } = await req.body;
@@ -39,6 +28,19 @@ exports.addSchedule = async (req, res) => {
             "schedule for same time alrady booked.please choose another time"
           );
       }
+    }
+  });
+};
+
+exports.getSchedules = async (req, res) => {
+  let { date, teacherId } = req.body;
+  let getQuery = `select * from bh8skktn4hxrdqcocv5b.schedule_table
+    where TeacherId = ${teacherId} and fromDate >= "${date}";`;
+  db.query(getQuery, (err, result) => {
+    if (err) {
+      res.status(401).json("err in getting schedules");
+    } else {
+      res.json(result);
     }
   });
 };
