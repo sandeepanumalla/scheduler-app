@@ -14,5 +14,6 @@ export let getSchedules = async (body) => {
     body: JSON.stringify(body),
   });
   let data = await response.json();
+  console.log(data);
   return data;
 };

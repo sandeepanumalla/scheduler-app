@@ -1,12 +1,15 @@
-export let setSchedule = async (body) => {
-  console.log("body", body);
-  // let response = await fetch(`http://localhost:5000/teachers/book/schedule`,{
-  //   method:"POST",
-  //   headers:{
-  //     "Accept":"application/json",
-  //     "Content-Type":"application/json"
+export let setSchedule = async (myBody) => {
+  console.log("body", myBody);
+  // let date = body.date;
+  // let TeacherId = body.teacherId;
+  // let b = { date, TeacherId };
+  // let response = await fetch(`http://localhost:5000/schedules/book`, {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
   //   },
-  //   body:JSON.stringify()
-  // })
-  // let date = await response.json();
+  //   body: JSON.stringify(myBody),
+  // });
+  // let data = await response.json();
 };

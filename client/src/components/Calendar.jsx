@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getSchedules } from "../apis/get";
 import "./style.css";
 
 const Calendar = ({ takeMonth, takeYear, letMeSetModal, giveDate }) => {
@@ -11,7 +12,7 @@ const Calendar = ({ takeMonth, takeYear, letMeSetModal, giveDate }) => {
     giveDate(i);
     letMeSetModal(true);
   };
-
+  let now = new Date();
   let weekDays = [
     "Sunday",
     "Monday",
@@ -51,7 +52,13 @@ const Calendar = ({ takeMonth, takeYear, letMeSetModal, giveDate }) => {
               onClick={() => {
                 handleClick(i - emptyblocks, takeMonth, takeYear);
               }}
-              className="check_box"
+              className={
+                i - emptyblocks === now.getDate() &&
+                takeMonth === now.getMonth() &&
+                takeYear === now.getFullYear()
+                  ? `check_box today`
+                  : `check_box`
+              }
               key={index}
             >
               {i - emptyblocks}

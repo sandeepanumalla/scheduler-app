@@ -34,8 +34,9 @@ exports.addSchedule = async (req, res) => {
 
 exports.getSchedules = async (req, res) => {
   let { date, teacherId } = req.body;
-  let getQuery = `select * from bh8skktn4hxrdqcocv5b.schedule_table
-    where TeacherId = ${teacherId} and fromDate >= "${date}";`;
+  
+  let getQuery = `SELECT * FROM bh8skktn4hxrdqcocv5b.schedule_table
+      WHERE TeacherId = ${teacherId.TeacherId} AND fromDate >= "${date}" ORDER BY fromDate ASC;`;
   db.query(getQuery, (err, result) => {
     if (err) {
       res.status(401).json("err in getting schedules");
@@ -43,4 +44,5 @@ exports.getSchedules = async (req, res) => {
       res.json(result);
     }
   });
+  // console.log(req.body);
 };

@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
-
 import "./style.css";
-const Header = ({ setFilter, giveYear, giveMonth, letSetModal }) => {
+
+const Header = ({
+  setFilter,
+  giveYear,
+  giveMonth,
+  letSetModal,
+  takePrev,
+  takeNext,
+}) => {
   const [localfilters, setLocalFilters] = useState("monthly");
+  const [prev, setPrev] = useState(true);
+  const [next, setnext] = useState(true);
+
   let date = new Date();
   let months = [
     "January",
@@ -61,27 +71,45 @@ const Header = ({ setFilter, giveYear, giveMonth, letSetModal }) => {
       <div className="btns">
         <button
           onClick={() => {
-            return setMonth(month - 1);
+            if (localfilters === "monthly") {
+              return setMonth(month - 1);
+            } else if (localfilters === "weekly") {
+              setPrev(!prev);
+              return takePrev(prev);
+            } else if (localfilters === "daily") {
+              setPrev(!prev);
+              return takePrev(prev);
+            }
           }}
         >
           {"<"}
         </button>
         <button
           onClick={() => {
-            return setMonth(month + 1);
+            if (localfilters === "monthly") {
+              return setMonth(month + 1);
+            } else if (localfilters === "weekly") {
+              setnext(!next);
+              return takeNext(next);
+            } else if (localfilters === "daily") {
+              setnext(!next);
+              return takeNext(next);
+            }
           }}
         >
           {">"}
         </button>
       </div>
       <div>
-        <button
-          onClick={() => {
-            letSetModal(true);
-          }}
-        >
-          View Schedules
-        </button>
+        {localfilters == "daily" ? (
+          <button
+            onClick={() => {
+              letSetModal(true);
+            }}
+          >
+            View Schedules
+          </button>
+        ) : null}
       </div>
       <div className="filters">
         <select
